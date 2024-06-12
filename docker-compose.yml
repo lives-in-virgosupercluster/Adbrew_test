@@ -3,23 +3,23 @@ services:
   api:
     build: .
     container_name: api
-    command: bash -c "cd /src/rest && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c " cd /src/rest/rest && ls  && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     links:
       - mongo
     volumes:
       - ${ADBREW_CODEBASE_PATH}/tmp:/tmp
-      - ${ADBREW_CODEBASE_PATH}:/src
+      - ${ADBREW_CODEBASE_PATH}:/src/rest
 
   app:
     build: .
     container_name: app
-    command: bash -c "cd /src/app && yarn install && yarn start"
+    command: bash -c "cd /src/app/app && ls && yarn install && yarn start"
     ports:
       - "3000:3000"
     volumes:
-      - ${ADBREW_CODEBASE_PATH}:/src
+      - ${ADBREW_CODEBASE_PATH}:/src/app
 
   mongo:
     build: .
